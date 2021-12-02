@@ -13,7 +13,7 @@ for line in lines:
         dep -= howMuch
     else:
         dep += howMuch
-
+print("Part 1:")
 print(horiz*dep)
 
 file = open("input.txt")
@@ -35,4 +35,5 @@ for line in lines:
     else:
         aim += howMuch
 
+print("Part 2:")
 print(horiz*dep)

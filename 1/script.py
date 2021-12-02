@@ -27,11 +27,8 @@ while(currentLine):
     currentLine = input.readline()
     indice += 1
 
-print(windowArray)
-
 for i in range(2, len(windowArray) - 1):
     if windowArray[i + 1] > windowArray[i]:
-        print(windowArray[i+1])
         increasingNumber += 1
 
 print("Part 2: ")
