@@ -1,4 +1,4 @@
-file = open("test.txt")
+file = open("input.txt")
 lines = file.readlines()
 horiz = 0
 dep = 0
@@ -16,7 +16,7 @@ for line in lines:
 
 print(horiz*dep)
 
-file = open("test.txt")
+file = open("input.txt")
 lines = file.readlines()
 
 horiz = 0
