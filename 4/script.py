@@ -71,7 +71,7 @@ bingo()
 
 # p2
 
-def checkBoardForWin2(boardIndice):
+def checkBoardForWin(boardIndice):
     for i in range(0, 5):
         for v in range(0, 5):
             if boards2[boardIndice][i][v] == 'mark':
@@ -90,7 +90,7 @@ def checkBoardForWin2(boardIndice):
 
     return False
 
-def addNums2(boardIndice):
+def addNums(boardIndice):
     total = 0
     for i in range(0, 5):
         for v in range(0, 5):
@@ -102,19 +102,15 @@ def addNums2(boardIndice):
 def p2():
     c = 0
     for num in callouts:
-        # print(num)
         while c < len(boards2):
             for i in range(0, 5):
                 for v in range(0, 5):
                     if num == boards2[c][i][v]:
                         boards2[c][i][v] = 'mark'
-                        if checkBoardForWin2(c):
-                            # print(boards2[c])
+                        if checkBoardForWin(c):
                             if len(boards2) == 1:
-                                # print(boards2[c])
                                 print('part 2')
-                                print(addNums2(c) * int(num))
-                                # print(addNums2(c))
+                                print(addNums(c) * int(num))
                                 return
                             else:
                                 boards2.pop(c)
