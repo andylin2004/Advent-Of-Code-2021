@@ -9,9 +9,7 @@ total = 0
 for line in lines:
     parts = line.split()
     coord = []
-    print(parts)
     parts[:] = [x for x in parts if x != '->']
-    print(parts)
     for part in parts:
         coord.append(part.split(','))
     points.append(coord)
@@ -49,6 +47,7 @@ def assess(total):
 
 total = assess(total)
 
+print('part 1')
 print(total)
 
 # p2
@@ -95,4 +94,5 @@ for pair in points:
 
 total = assess(total)
 
+print("part 2")
 print(total)
