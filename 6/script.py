@@ -32,13 +32,15 @@ def recursiveFish(time, days):
     elif time == 0:
         return recursiveFish(6, days-1) + recursiveFish(8, days-1)
     else:
-        return recursiveFish(time - 1, days-1)
+        return recursiveFish(0,  days - time)
 
 for num in array:
     total += recursiveFish(num, 80)
 
 print("p1")
 print(total)
+
+total = 0
 
 for num in array:
     total += recursiveFish(num, 256)
