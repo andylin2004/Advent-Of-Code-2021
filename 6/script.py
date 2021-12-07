@@ -3,7 +3,6 @@ file = open("input.txt")
 lines = file.readlines()
 from functools import cache
 
-
 array = []
 for line in lines:
     parts = line.split(',')
