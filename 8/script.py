@@ -1,7 +1,7 @@
-# file = open("input.txt")
+file = open("input.txt")
 # file = open("test.txt")
 # file = open("3test.txt")
-file = open("2test.txt")
+# file = open("2test.txt")
 
 lines = file.readlines()
 
@@ -19,7 +19,7 @@ for part in array:
         if len(out) == 2 or len(out) == 4 or len(out) == 7 or len(out) == 3:
             total += 1
 
-print(total)
+print("part 1: " + str(total))
 
 total = 0
 
@@ -42,7 +42,6 @@ for part in array:
         elif len(out) == 4:
             organizedArray[4] = out
 
-    print(organizedArray)
     # find what makes top lit
     split1 = organizedArray[7]
     split2 = organizedArray[1]
@@ -59,16 +58,34 @@ for part in array:
         if len(out) == 5 and len(list(set(organizedArray[6]).intersection(out))) == 5:
             organizedArray[5] = out
             bottomL = list(set(organizedArray[6]).difference(organizedArray[5]))[0]
+    
+    for out in part[0]:
         #find what 0 is and middle area
-        elif len(out) == 6 and len(list(set(organizedArray[6]).intersection(out))) == 5:
+        if len(out) == 6 and len(list(set(organizedArray[6]).intersection(out))) == 5 and bottomL in out:
             organizedArray[0] = out
             middle = list(set(organizedArray[8]).difference(out))[0]
 
     for out in part[0]:
+        #find what 9 is
         if len(out) == 6 and list(set(organizedArray[8]).difference(out))[0] == bottomL:
             organizedArray[9] = out
+        #find what 8 is and bottom
         elif len(out) == 5 and len(list(set(out).difference({top, topR, middle, bottomL}))) == 1:
             bottom = list(set(out).difference({top, topR, middle, bottomL}))[0]
             organizedArray[2] = out
 
+    # process of elimination: we can find what 3 is
     organizedArray[3] = list(set(part[0]).difference(organizedArray))[0]
+
+    result = ''
+    for out in part[1]:
+        i = 0
+        while i<10:
+            if len(list(set(organizedArray[i]).difference(out))) == 0 and len(organizedArray[i]) == len(out):
+                result += str(i)
+                break
+            i += 1
+
+    total += int(result)
+
+print("part 2: " + str(total))
