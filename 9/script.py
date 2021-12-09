@@ -10,7 +10,6 @@ for line in lines:
     array.append(parts)
 
 isBasinArray = [[0 for i in range(len(array[0]))] for v in range(len(array))]
-print(len(isBasinArray[0]))
 
 for i in range(0,len(array)):
     for v in range(0,len(array[0])):
