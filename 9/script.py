@@ -52,7 +52,6 @@ for i in range(0,len(array)):
                 isBasinArray[i][v] = 1
 
 sizes = []
-print(isBasinArray)
 
 def getBasinSizeRecur(i, v, prevI, prevV):
     total = 1
@@ -80,14 +79,12 @@ for i in range(len(array)):
         if isBasinArray[i][v] == 2:
             sizes.append(getBasinSizeRecur(i, v, -1, -1))
 
-print(sizes)
-
 sizes.sort(reverse=True)
 
 total = sizes[0]
 for i in range(1,3):
     total *= sizes[i]
 
-print(total) 
+print('part 2: ' + str(total))
                 
     
