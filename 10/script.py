@@ -1,6 +1,5 @@
 from statistics import median
 
-# file = open("test.txt")
 file = open("input.txt")
 
 lines = file.readlines()
