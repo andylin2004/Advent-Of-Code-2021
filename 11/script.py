@@ -5,7 +5,6 @@ file = open("input.txt")
 lines = file.readlines()
 
 fishArray = []
-fishCanFlash = []
 dx = [0,1,0,-1,1,1,-1,-1]
 dy = [1,0,-1,0,-1,1,1,-1]
 
@@ -13,21 +12,7 @@ totalFlash = 0
 stepSync = 0
 s = 0
 
-def resetFish():
-    for _ in range(len(fishArray)):
-        temp = []
-        for _ in range(len(fishArray[0])):
-            temp.append(True)
-        fishCanFlash.append(temp)
-
-def moreFishToFlash():
-    for i in range(len(fishArray)):
-        for v in range(len(fishArray[0])):
-            if fishArray[i][v] > 9 and fishCanFlash[i][v]:
-                return True
-    return False
-
-def flashFishRecursive(i,v, prevI, prevV):
+def flashFishRecursive(i,v):
     if fishArray[i][v] > 9:
         total = 1
         fishArray[i][v] = -1
@@ -51,8 +36,6 @@ for line in lines:
     parts = [int(part) for part in line if part != '\n']
     fishArray.append(parts)
 
-resetFish()
-
 while (not syncFlash()):
     s += 1
     for i in range(len(fishArray)):
@@ -73,11 +56,7 @@ while (not syncFlash()):
 
     if (syncFlash()):
         stepSync = s
-        print(s)
         break
-
-    fishCanFlash = []
-    resetFish()
 
     print(fishArray)
 
