@@ -19,7 +19,7 @@ def flashFishRecursive(i,v):
         for x,y in zip(dx,dy):
             if 0 <= i+x < len(fishArray) and 0 <= v+y < len(fishArray[0]) and fishArray[i+x][v+y] != -1:
                 fishArray[i+x][v+y] += 1
-                total += flashFishRecursive(i+x, v+y, i, v)
+                total += flashFishRecursive(i+x, v+y)
         return total
     else:
         return 0
@@ -45,9 +45,9 @@ while (not syncFlash()):
     for i in range(len(fishArray)):
         for v in range(len(fishArray[0])):
             if s <= 100:
-                totalFlash += flashFishRecursive(i,v,-1,-1)
+                totalFlash += flashFishRecursive(i,v)
             else:
-                flashFishRecursive(i,v,-1,-1)
+                flashFishRecursive(i,v)
 
     for i in range(len(fishArray)):
         for v in range(len(fishArray[0])):
@@ -58,8 +58,6 @@ while (not syncFlash()):
         stepSync = s
         break
 
-    print(fishArray)
 
-
-print(totalFlash)
-print(stepSync)
+print('part 1:', totalFlash)
+print('part 2:', stepSync)
