@@ -37,9 +37,8 @@ for line in lines:
     
 # go through path
 
-def transverseRecursive(currentNode, smallsWent, allWent):
+def transverseRecursive(currentNode, smallsWent):
     smallsWentNew = copy.copy(smallsWent)
-    allWentNew = copy.copy(allWent)
     if currentNode.name == 'end':
         return 1
     if currentNode.name in smallsWentNew:
@@ -50,13 +49,12 @@ def transverseRecursive(currentNode, smallsWent, allWent):
     total = 0
     if currentNode.name[0].islower():
         smallsWentNew.append(currentNode.name)
-    allWentNew.append(currentNode.name)
     for i in currentNode.connectsWith:
         nextNode = None
         for v in array:
             if v.name == i:
                 nextNode = v
-        total += transverseRecursive(nextNode, smallsWentNew, allWentNew)
+        total += transverseRecursive(nextNode, smallsWentNew)
     return total
 
 start = None
@@ -64,14 +62,13 @@ for i in array:
     if i.name == 'start':
         start = i
 
-print('part 1:',transverseRecursive(start, [], []))
+print('part 1:',transverseRecursive(start, []))
 
-def transverseRecursiveP2(currentNode, smallsWent, allWent, twice):
+def transverseRecursiveP2(currentNode, smallsWent, leftStart, twice):
     smallsWentNew = copy.copy(smallsWent)
-    allWentNew = copy.copy(allWent)
     if currentNode.name == 'end':
         return 1
-    if (currentNode.name in smallsWentNew and twice) or (currentNode.name == 'start' and len(allWent)):
+    if (currentNode.name in smallsWentNew and twice) or (currentNode.name == 'start' and leftStart):
         smallsWentNew.append(currentNode.name)
         if currentNode.name[0].islower():
             smallsWentNew.append(currentNode.name)
@@ -81,13 +78,12 @@ def transverseRecursiveP2(currentNode, smallsWent, allWent, twice):
     total = 0
     if currentNode.name[0].islower():
         smallsWentNew.append(currentNode.name)
-    allWentNew.append(currentNode.name)
     for i in currentNode.connectsWith:
         nextNode = None
         for v in array:
             if v.name == i:
                 nextNode = v
-        total += transverseRecursiveP2(nextNode, smallsWentNew, allWentNew, twice)
+        total += transverseRecursiveP2(nextNode, smallsWentNew, True, twice)
     return total
 
-print('part 2:',transverseRecursiveP2(start, [], [], False))
+print('part 2:',transverseRecursiveP2(start, [], False, False))
