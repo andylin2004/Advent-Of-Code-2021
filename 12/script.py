@@ -35,7 +35,7 @@ for line in lines:
     if nope2:
         array.append(Node(parts[1], [parts[0]]))
     
-# go through path
+# go through path assuming that i can go to each small cave once only
 
 def transverseRecursive(currentNode, smallsWent):
     smallsWentNew = copy.copy(smallsWent)
@@ -63,6 +63,8 @@ for i in array:
         start = i
 
 print('part 1:',transverseRecursive(start, []))
+
+# go through path assuming that i can go to a small cave twice and other small caves only once
 
 def transverseRecursiveP2(currentNode, smallsWent, leftStart, twice):
     smallsWentNew = copy.copy(smallsWent)
