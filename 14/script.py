@@ -1,4 +1,3 @@
-from collections import Counter
 import copy
 
 file = open("test.txt")
@@ -8,13 +7,11 @@ lines = file.readlines()
 
 array = []
 toEdit = ''
-toEditUnused = ''
 for line in lines:
     if '->' not in line and line != '\n':
         line = line.strip()
         print(line)
         toEdit = line
-        toEditUnused = toEdit
     elif '->' in line:
         line = line.strip()
         parts = line.split(' ')
@@ -23,40 +20,21 @@ for line in lines:
 
 toEdit = toEdit.strip()
 
-for _ in range(10):
-    i = 0
-    while i < len(toEdit)-1:
-        for v in array:
-            if v[0] == toEdit[i:i+2]:
-                toEdit = toEdit[:i+1]+v[1]+toEdit[i+1:]
-
-                i += 1
-                break
-        i += 1
-
-toEdit = toEdit.strip()
-mostCommon = Counter(toEdit).most_common()[0]
-common  = list(Counter(toEdit).values())
-common.sort()
-print('part 1:', common[-1] - common[0])
-
 parts = [] 
 chars = []
 
-for i in range(len(toEditUnused)-1):
-    lookingAt = toEditUnused[i:i+2]
+for i in range(len(toEdit)-1):
+    lookingAt = toEdit[i:i+2]
     found = False
     for v in parts:
-        if v[0] == toEditUnused:
+        if v[0] == toEdit:
             v[1] += 1
             found = True
     if not found:
         inPart = [lookingAt, 1]
         parts.append(inPart)
 
-print(parts)
-
-for i in toEditUnused:
+for i in toEdit:
     found = False
     for v in chars:
         if v[0] == i:
@@ -65,8 +43,6 @@ for i in toEditUnused:
     if not found:
         inPart = [i, 1]
         chars.append(inPart)
-
-print(chars)
 
 def updateValue(array, name, newVal):
     for i in array:
@@ -81,7 +57,7 @@ def findIndiceOfName(array, name):
         if i[0] == name:
             return i[1]
 
-for _ in range(40):
+for v in range(40):
     newParts = copy.deepcopy(parts)
     newChars = copy.deepcopy(chars)
 
@@ -96,9 +72,11 @@ for _ in range(40):
     parts = newParts
     chars = newChars
 
+    if v == 9:
+        chars.sort(key=lambda x:x[1])
+
+        print('part 1:', chars[-1][1] - chars[0][1])
+
 chars.sort(key=lambda x:x[1])
 
-print(chars[-1][1] - chars[0][1])
-        
-# print(parts)
-# print(chars)
+print('part 2:', chars[-1][1] - chars[0][1])
