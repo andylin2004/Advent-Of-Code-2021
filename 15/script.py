@@ -14,7 +14,7 @@ for line in lines:
     parts = [int(part) for part in line if part != '\n']
     array.append(parts)
 
-def dij(array):
+def dij(array): #dijkastra algo for pathcounting
 
     # three arrays
     results = [[10000] * len(array[0]) for _ in range(len(array))] # for keeping the least number of steps to get to an array slot
