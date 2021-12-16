@@ -20,11 +20,10 @@ def subpacket(pointer):
     pointer += 3
     packetType = int(base2[pointer:pointer+3], 2)
     pointer += 3
-    meme = base2[pointer:pointer+3]
-    print(meme)
     totalLength = 0
     totalSubpackets = 0
     total = 0
+    rightSide = 0
 
     print('type', packetType)
     print('version', packetVersion)
@@ -73,6 +72,10 @@ def subpacket(pointer):
                     if total == 0:
                         total = result[1]
                     total = max(total, result[1])
+                elif total == 0:
+                    total = result[1]
+                else:
+                    rightSide = result[1]
                 print('e', result[1])
         else:
             pointer += 1
@@ -96,10 +99,30 @@ def subpacket(pointer):
                     if total == 0:
                         total = result[1]
                     total = max(total, result[1])
+                elif total == 0:
+                    total = result[1]
+                else:
+                    rightSide = result[1]
                 totalVersion += result[2]
                 print('a', result[1])
 
     print(base2)
+
+    if packetType == 5:
+        if total > rightSide:
+            total = 1
+        else:
+            total = 0
+    elif packetType == 6:
+        if total < rightSide:
+            total = 1
+        else:
+            total = 0
+    elif packetType == 7:
+        if total == rightSide:
+            total = 1
+        else:
+            total = 0
     return pointer - pointerOriginal, total, totalVersion
 
 result = subpacket(0)
