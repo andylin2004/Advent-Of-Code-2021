@@ -24,20 +24,20 @@ def dij(array):
     pq.append([0, (0,0)]) # preprocessing start place so we can kickstart checking the neighbors later
     results[0][0] = 0 # preprocessing the start, as it doesn't count at all and we don't want anything bad to happen
 
-    heapq.heapify(pq)
+    heapq.heapify(pq) # dijkstra uses a priority queue
 
     while len(pq) > 0:
-        u = heapq.heappop(pq) # pop out the least first value (the currently lowest num)
+        u = heapq.heappop(pq) # pop out the thing in the array where the tentative (first indice) value is the least of all of them, because we are very sure that is the min
         x = u[1][0]
         y = u[1][1]
-        if isVisited[x][y]:
+        if isVisited[x][y]: # just in case it pops up again sometime later and we already did it with a better case scenario
             continue
         for cx,cy in zip(dx,dy):
             if 0 <= x+cx < len(array) and 0 <= y+cy < len(array[0]):
-                newDist = results[x][y] + array[x+cx][y+cy] # do 
-                if results[x+cx][y+cy] > newDist:
+                newDist = results[x][y] + array[x+cx][y+cy] # newDist is the tentative distance plus the number at a neighbor specified
+                if results[x+cx][y+cy] > newDist: # we want the least num of steps to the neighbor as possible, so keep the min of the two for the tentative result
                     results[x+cx][y+cy] = newDist
-                    heapq.heappush(pq, [newDist, (x+cx, y+cy)])
+                    heapq.heappush(pq, [newDist, (x+cx, y+cy)]) # we will handle the neighbor's neighbors later, once we are more sure that this is the min it can go
         
         isVisited[x][y] = True
 
