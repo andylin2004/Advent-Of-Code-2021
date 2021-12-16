@@ -1,5 +1,5 @@
 file = open("test.txt")
-# file = open("input.txt")
+file = open("input.txt")
 
 line = file.readline()
 line = line.strip()
@@ -22,8 +22,8 @@ def subpacket(pointer):
     pointer += 3
     totalLength = 0
     totalSubpackets = 0
-    total = 0
-    rightSide = 0
+    total = None
+    rightSide = None
 
     print('type', packetType)
     print('version', packetVersion)
@@ -59,20 +59,22 @@ def subpacket(pointer):
                 totalBytes += result[0]
                 pointer += result[0]
                 if packetType == 0:
+                    if total == None:
+                        total = 0
                     total += result[1]
                 elif packetType == 1:
-                    if total == 0:
+                    if total == None:
                         total = 1
                     total *= result[1]
                 elif packetType == 2:
-                    if total == 0:
+                    if total == None:
                         total = result[1]
                     total = min(result[1], total)
                 elif packetType == 3:
-                    if total == 0:
+                    if total == None:
                         total = result[1]
                     total = max(total, result[1])
-                elif total == 0:
+                elif total == None:
                     total = result[1]
                 else:
                     rightSide = result[1]
@@ -86,20 +88,22 @@ def subpacket(pointer):
                 result = subpacket(pointer)
                 pointer += result[0]
                 if packetType == 0:
+                    if total == None:
+                        total = 0
                     total += result[1]
                 elif packetType == 1:
-                    if total == 0:
+                    if total == None:
                         total = 1
                     total *= result[1]
                 elif packetType == 2:
-                    if total == 0:
+                    if total == None:
                         total = result[1]
                     total = min(result[1], total)
                 elif packetType == 3:
-                    if total == 0:
+                    if total == None:
                         total = result[1]
                     total = max(total, result[1])
-                elif total == 0:
+                elif total == None:
                     total = result[1]
                 else:
                     rightSide = result[1]
