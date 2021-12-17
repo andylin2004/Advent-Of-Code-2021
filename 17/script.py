@@ -13,7 +13,7 @@ yRange = yStr.split('.')
 xRange[:] = [int(meme) for meme in xRange]
 yRange[:] = [int(meme) for meme in yRange]
 
-print('part 1:', (-1 * yRange[0] -1) * (-1 * yRange[0]) / 2)
+print('part 1:', (-1 * yRange[0] -1) * (-1 * yRange[0]) // 2)
 
 pairSets = []
 
@@ -21,8 +21,6 @@ minXWorkingValue = 0
 maxXWorkingValue = xRange[1]
 maxYWorkingValue = (-1 * yRange[0] -1)
 minYWorkingValue = yRange[0]
-
-print(maxYWorkingValue)
 
 while minXWorkingValue * (minXWorkingValue + 1) / 2 < xRange[0]:
     minXWorkingValue += 1
@@ -46,6 +44,4 @@ for initDx in range(minXWorkingValue, maxXWorkingValue+1):
 
 total = len(set(pairSets))
 
-print(pairSets)
-
-print(total)
+print('part 2:', total)
